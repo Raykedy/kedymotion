@@ -1,37 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kedy Motion — Watch</title>
 
 <style>
-body{
-  margin:0;
-  overflow:hidden;
-  background:black;
-}
+  :root{
+    --uiMax: 1100px;
+    --glass: rgba(0,0,0,.35);
+    --border: rgba(255,255,255,.25);
+    --text: rgba(255,255,255,.92);
+    --accent: #4dd0a8;
+  }
 
-video{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  height:100vh;
-  width:auto;
-  min-width:100%;
-  object-fit:cover;
-  z-index:-1;
-}
+  body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+  }
+
+  /* BACKGROUND VIDEO (same as main) */
+  .bg{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+  }
+  .bg video{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    height:100vh;
+    width:auto;
+    min-width:100%;
+    object-fit:cover;
+  }
+
+  /* subtle overlay for readability */
+  .veil{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background: radial-gradient(transparent 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.55) 100%);
+    pointer-events:none;
+  }
+
+  /* UI wrapper */
+  .wrap{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 20px;
+    box-sizing:border-box;
+  }
+
+  .ui{
+    width:min(var(--uiMax), 92vw);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:center;
+  }
+
+  /* header line */
+  .topbar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding: 10px 14px;
+    border-radius: 18px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-sizing:border-box;
+  }
+
+  .brand{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .brand .name{
+    font-weight:700;
+    letter-spacing:.5px;
+    color: var(--accent);
+  }
+  .brand .tag{
+    font-size:12px;
+    letter-spacing:3px;
+    opacity:.9;
+  }
+
+  .actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+
+  .btn{
+    cursor:pointer;
+    user-select:none;
+    border-radius:999px;
+    padding:10px 14px;
+    background: transparent;
+    border:1px solid rgba(255,255,255,.35);
+    color: var(--text);
+    font-weight:700;
+    text-decoration:none;
+    font-size:14px;
+    line-height:1;
+  }
+  .btn:hover{ border-color: rgba(255,255,255,.6); }
+
+  /* player shell (changes aspect by class) */
+  .playerShell{
+    width:100%;
+    border-radius: 22px;
+    background: rgba(0,0,0,.25);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow:hidden;
+    box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  /* aspect modes */
+  .playerShell.h{ aspect-ratio: 16 / 9; max-height: 66vh; }
+  .playerShell.v{ aspect-ratio: 9 / 16; max-height: 74vh; width:min(520px, 92vw); }
+
+  /* video */
+  #workVideo{
+    width:100%;
+    height:100%;
+    background:black;
+  }
+
+  /* object-fit modes */
+  .fitContain{ object-fit: contain; }
+  .fitCover{ object-fit: cover; }
+
+  /* bottom selector */
+  .selector{
+    width:100%;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .chip{
+    cursor:pointer;
+    border-radius:999px;
+    padding:10px 14px;
+    background: rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.22);
+    color: rgba(255,255,255,.88);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.4px;
+    user-select:none;
+  }
+  .chip:hover{ border-color: rgba(255,255,255,.55); }
+  .chip.active{
+    border-color: rgba(77,208,168,.75);
+    color: rgba(77,208,168,.95);
+    background: rgba(77,208,168,.08);
+  }
+
+  /* small helper text */
+  .hint{
+    font-size:12px;
+    opacity:.75;
+    text-align:center;
+    margin-top:-4px;
+  }
+
+  @media (max-width: 520px){
+    .brand .tag{ display:none; }
+  }
 </style>
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline>
-  <source src="Fonstudio.mp4" type="video/mp4">
-</video>
+<!-- Background -->
+<div class="bg">
+  <video autoplay muted loop playsinline>
+    <source src="Fonstudio.mp4" type="video/mp4" />
+  </video>
+</div>
+<div class="veil"></div>
+
+<!-- UI -->
+<div class="wrap">
+  <div class="ui">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="name">Kedy Motion</div>
+        <div class="tag">WATCH WORKS</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="toggleSound" type="button">Sound: Off</button>
+        <a class="btn" href="index.html">Back</a>
+      </div>
+    </div>
+
+    <div class="playerShell h" id="shell">
+      <video id="workVideo" class="fitCover" autoplay muted loop playsinline></video>
+    </div>
+
+    <div class="hint" id="hint">Tap a work — vertical/horizontal switches automatically.</div>
+
+    <div class="selector" id="selector"></div>
+
+  </div>
+</div>
+
+<script>
+  // 1) Add your works here (mp4 paths)
+  // type: "h" (horizontal) or "v" (vertical)
+  const works = [
+    { title: "Work 1 (H)", src: "videos/work1.mp4", type: "h" },
+    { title: "Work 2 (V)", src: "videos/work2.mp4", type: "v" },
+    { title: "Work 3 (H)", src: "videos/work3.mp4", type: "h" },
+    { title: "Work 4 (V)", src: "videos/work4.mp4", type: "v" },
+  ];
+
+  const shell = document.getElementById("shell");
+  const vid = document.getElementById("workVideo");
+  const selector = document.getElementById("selector");
+  const toggleSound = document.getElementById("toggleSound");
+
+  let current = 0;
+  let soundOn = false;
+
+  function applyMode(type){
+    // aspect
+    shell.classList.remove("h","v");
+    shell.classList.add(type);
+
+    // fit logic (hybrid):
+    // horizontal -> cover (more cinematic)
+    // vertical -> contain (no important crop)
+    vid.classList.remove("fitContain","fitCover");
+    vid.classList.add(type === "v" ? "fitContain" : "fitCover");
+  }
+
+  function loadWork(i){
+    current = i;
+    const w = works[i];
+    applyMode(w.type);
+
+    // set source
+    vid.src = w.src;
+    vid.load();
+    vid.play().catch(()=>{});
+
+    // update chips
+    [...selector.children].forEach((c, idx)=>{
+      c.classList.toggle("active", idx === i);
+    });
+  }
+
+  function buildSelector(){
+    selector.innerHTML = "";
+    works.forEach((w, i)=>{
+      const chip = document.createElement("div");
+      chip.className = "chip" + (i === 0 ? " active" : "");
+      chip.textContent = w.title;
+      chip.addEventListener("click", ()=> loadWork(i));
+      selector.appendChild(chip);
+    });
+  }
+
+  toggleSound.addEventListener("click", ()=>{
+    soundOn = !soundOn;
+    vid.muted = !soundOn;
+    toggleSound.textContent = soundOn ? "Sound: On" : "Sound: Off";
+  });
+
+  // init
+  buildSelector();
+  loadWork(0);
+</script>
 
 </body>
 </html>
+
 
