@@ -1,108 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kedy Motion</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  overflow:hidden;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    color: white;
 }
 
 /* Видео фон */
-video{
-  position:fixed;
-  right:0;
-  bottom:0;
-  min-width:100%;
-  min-height:100%;
-  object-fit:cover;
-  z-index:-1;
+video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
-/* Карточка */
-.card{
-  width:min(720px,90%);
-  padding:40px 30px;
-  border-radius:24px;
-
-  /* Почти прозрачное стекло */
-  background:rgba(0,0,0,0.05);
-
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-
-  border:1px solid rgba(255,255,255,0.25);
-
-  text-align:center;
+/* Центрирование */
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Заголовок */
-.title{
-  font-size:clamp(32px,5vw,48px);
-  font-weight:700;
-  margin-bottom:12px;
-  color:#ffffff;
-
-  /* Легкое зеленое свечение */
-  text-shadow:
-    0 0 10px rgba(0,255,170,0.5),
-    0 0 25px rgba(0,255,170,0.3);
+/* Стеклянная карточка */
+.card {
+    background: rgba(0, 0, 0, 0.30); /* лёгкое затемнение */
+    backdrop-filter: blur(18px);
+    padding: 50px 40px;
+    border-radius: 30px;
+    text-align: center;
+    width: 85%;
+    max-width: 420px;
+    border: 1px solid rgba(255,255,255,0.25);
 }
 
-/* Подзаголовок */
-.subtitle{
-  letter-spacing:3px;
-  font-size:14px;
-  opacity:0.9;
-  margin-bottom:30px;
+/* Kedy Motion — зелёный с лёгким свечением */
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 42px;
+    font-weight: bold;
+    color: #4ad9b4;
+    text-shadow: 0 0 10px rgba(74, 217, 180, 0.6);
+}
+
+/* AI CREATIVE STUDIO — белый */
+h2 {
+    margin: 0 0 35px 0;
+    font-size: 16px;
+    letter-spacing: 3px;
+    font-weight: normal;
+    color: #ffffff;
 }
 
 /* Кнопки */
-.button{
-  display:block;
-  width:100%;
-  padding:16px;
-  border-radius:40px;
-  font-size:18px;
-  font-weight:600;
-  text-decoration:none;
-  margin-bottom:18px;
-  transition:0.3s;
+.button-main {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 50px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #4ad9b4;
+    color: black;
 }
 
-/* Первая кнопка */
-.primary{
-  background:#4DE1B1;
-  color:#000;
-}
-
-.primary:hover{
-  transform:scale(1.05);
-}
-
-/* Вторая кнопка */
-.secondary{
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.4);
-  color:white;
-}
-
-.secondary:hover{
-  background:rgba(255,255,255,0.2);
+.button-secondary {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.4);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(255,255,255,0.05);
+    color: white;
 }
 </style>
 </head>
@@ -110,19 +94,22 @@ video{
 <body>
 
 <video autoplay muted loop playsinline>
-  <source src="Fonstudio.mp4" type="video/mp4">
+    <source src="Fonstudio.mp4" type="video/mp4">
 </video>
 
-<div class="card">
-  <h1 class="title">Kedy Motion</h1>
-  <div class="subtitle">AI CREATIVE STUDIO</div>
+<div class="container">
+    <div class="card">
+        <h1>Kedy Motion</h1>
+        <h2>AI CREATIVE STUDIO</h2>
 
-  <a href="#" class="button primary">Watch works</a>
-  <a href="#" class="button secondary">Order a video</a>
+        <button class="button-main">Watch works</button>
+        <button class="button-secondary">Order a video</button>
+    </div>
 </div>
 
 </body>
 </html>
+
 
 
 
