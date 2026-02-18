@@ -8,7 +8,6 @@
 <style>
 :root{
   --accent:#49ffd2;
-  --text:#ffffff;
 }
 
 *{box-sizing:border-box;}
@@ -17,7 +16,7 @@ body{
   margin:0;
   min-height:100vh;
   font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: var(--text);
+  color:#fff;
   overflow:hidden;
 }
 
@@ -41,35 +40,56 @@ body{
   text-align:center;
 }
 
-/* ✅ LIGHT (not dark) glass card */
+/* ✅ TRUE GLASS CARD (almost transparent) */
 .card{
   width:min(720px,100%);
-  padding:32px 24px;
+  padding:34px 24px;
   border-radius:22px;
+  position:relative;
 
-  /* светлая стеклянная карточка */
-  background: rgba(255,255,255,0.16);
+  /* почти прозрачное стекло */
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.03)
+  );
+
+  /* блики/подсветка по краям (стеклянный эффект) */
+  border: 1px solid rgba(255,255,255,0.22);
+
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 
-  border: 1px solid rgba(255,255,255,0.35);
-
-  /* тень нейтральная, без зелени */
-  box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+  /* тень нейтральная, без зелёного */
+  box-shadow: 0 25px 70px rgba(0,0,0,0.38);
 }
 
-/* Title with green glow */
+/* дополнительный “блик” внутри карточки */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  pointer-events:none;
+
+  background: radial-gradient(
+    900px 260px at 50% 10%,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.00) 60%
+  );
+}
+
+/* Title: лёгкое зелёное свечение (НЕ неон) */
 h1{
   margin:0 0 12px;
   font-size: clamp(34px,5vw,56px);
   letter-spacing:0.5px;
   color:#ffffff;
 
-  /* 💚 зелёное свечение только у текста */
   text-shadow:
-    0 0 10px rgba(73,255,210,0.30),
-    0 0 26px rgba(73,255,210,0.22),
-    0 10px 30px rgba(0,0,0,0.45);
+    0 0 6px rgba(73,255,210,0.22),
+    0 0 14px rgba(73,255,210,0.14),
+    0 10px 24px rgba(0,0,0,0.45);
 }
 
 /* Subtitle pure white */
@@ -79,7 +99,7 @@ p{
   letter-spacing:1px;
   text-transform:uppercase;
   color:#ffffff;
-  opacity:1;
+  opacity:0.95;
 }
 
 .btns{
@@ -95,7 +115,7 @@ p{
   align-items:center;
   justify-content:center;
   padding:14px 20px;
-  min-width: 210px;
+  min-width: 220px;
 
   border-radius:18px;
   text-decoration:none;
@@ -104,14 +124,14 @@ p{
   background: var(--accent);
   color:#0b0f14;
 
-  box-shadow: 0 12px 30px rgba(73,255,210,0.35);
+  box-shadow: 0 12px 30px rgba(73,255,210,0.32);
 }
 
-/* Secondary button */
+/* Secondary button (glass) */
 .btn.secondary{
-  background: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
   color:#ffffff;
-  border: 1px solid rgba(255,255,255,0.40);
+  border: 1px solid rgba(255,255,255,0.22);
   box-shadow:none;
   font-weight:700;
 }
@@ -140,6 +160,8 @@ p{
 
 </body>
 </html>
+
+
 
 
 
