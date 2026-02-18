@@ -1,134 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kedy Motion</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kedy Motion</title>
 
-  <style>
-    :root{
-      /* === ОДНА РУЧКА НАСТРОЙКИ ===
-         Это размер карточки (и "диаметр круга", под который она должна совпасть).
-         Увеличить/уменьшить можно только тут. */
-      --cardSize: min(78vmin, 560px);
+<style>
+:root{
+  --cardSize: min(78vmin, 560px);
+  --cardTop: 50%;
+}
 
-      /* Чуть поднять/опустить карточку (если надо подогнать под центр круга на твоём видео) */
-      --cardTop: 50%;
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  overflow:hidden;
+  background:black;
+}
 
-      /* Стекло: лёгкое затемнение (карточка почти прозрачная) */
-      --glassBg: rgba(0, 0, 0, 0.14);
+video{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  height:100vh;
+  width:auto;
+  min-width:100%;
+  object-fit:cover;
+  z-index:-1;
+}
 
-      /* Заголовок зелёный + лёгкое свечение */
-      --titleColor: #4dd0a8;
-      --titleGlow: rgba(77, 208, 168, 0.35);
-    }
+/* ПРОЗРАЧНАЯ КАРТОЧКА */
+.card{
+  position:absolute;
+  top:var(--cardTop);
+  left:50%;
+  transform:translate(-50%,-50%);
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      background: black;
-    }
+  width:var(--cardSize);
+  aspect-ratio:1/1;
 
-    /* ВИДЕО ФОН (НЕ ТРОГАЮ) */
-    video {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 100vh;
-      width: auto;
-      min-width: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
+  border-radius:28px;
 
-    /* КАРТОЧКА: КВАДРАТ, В КОТОРЫЙ ВПИСЫВАЕТСЯ КРУГ */
-    .card {
-      position: absolute;
-      top: var(--cardTop);
-      left: 50%;
-      transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.05); /* почти прозрачная */
+  border:1px solid rgba(255,255,255,0.35);
 
-      width: var(--cardSize);
-      aspect-ratio: 1 / 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-      border-radius: 28px;
-      background: var(--glassBg);
-      border: 1px solid rgba(255,255,255,0.28);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
 
-      /* "Стекло" */
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+  text-align:center;
+  box-sizing:border-box;
+  padding: clamp(18px,4vmin,36px);
+}
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
+/* KEDY MOTION ЗЕЛЁНЫЙ */
+h1{
+  margin:0;
+  font-size: clamp(28px,6vmin,52px);
+  color:#4dd0a8;
+  text-shadow:
+    0 0 10px rgba(77,208,168,0.4),
+    0 0 20px rgba(77,208,168,0.25);
+}
 
-      text-align: center;
-      box-sizing: border-box;
-      padding: clamp(18px, 4vmin, 36px);
-    }
+/* AI CREATIVE STUDIO БЕЛЫЙ */
+.subtitle{
+  margin:0;
+  font-size: clamp(12px,2.1vmin,16px);
+  letter-spacing:4px;
+  color:white;
+}
 
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 6vmin, 52px);
-      color: var(--titleColor);
-      text-shadow:
-        0 0 10px var(--titleGlow),
-        0 0 22px rgba(77, 208, 168, 0.18);
-      letter-spacing: 0.5px;
-    }
+/* КНОПКИ */
+.btn{
+  display:block;
+  width: clamp(220px,60%,360px);
+  padding:18px 16px;
+  border-radius:999px;
+  font-size:18px;
+  text-decoration:none;
+  font-weight:bold;
+  text-align:center;
+  box-sizing:border-box;
+}
 
-    .subtitle {
-      margin: 0;
-      font-size: clamp(12px, 2.1vmin, 16px);
-      letter-spacing: 4px;
-      color: #ffffff; /* AI CREATIVE STUDIO БЕЛЫМ */
-      opacity: 0.95;
-    }
+.btn-primary{
+  background:#4dd0a8;
+  color:black;
+}
 
-    .btn {
-      display: block;
-      width: clamp(220px, 60%, 360px);
-      padding: 18px 16px;
-      border-radius: 999px;
-      font-size: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .btn-primary {
-      background: #4dd0a8;
-      color: #000;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.6);
-      color: #fff;
-    }
-  </style>
+.btn-secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.7);
+  color:white;
+}
+</style>
 </head>
 
 <body>
-  <video autoplay muted loop playsinline>
-    <source src="Fonstudio.mp4" type="video/mp4" />
-  </video>
 
-  <div class="card">
-    <h1>Kedy Motion</h1>
-    <div class="subtitle">AI CREATIVE STUDIO</div>
+<video autoplay muted loop playsinline>
+  <source src="Fonstudio.mp4" type="video/mp4">
+</video>
 
-    <a href="#" class="btn btn-primary">Watch works</a>
-    <a href="#" class="btn btn-secondary">Order a video</a>
-  </div>
+<div class="card">
+  <h1>Kedy Motion</h1>
+  <div class="subtitle">AI CREATIVE STUDIO</div>
+
+  <a href="#" class="btn btn-primary">Watch works</a>
+  <a href="#" class="btn btn-secondary">Order a video</a>
+</div>
+
 </body>
 </html>
+
 
 
 
