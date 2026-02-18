@@ -1,165 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kedy Motion</title>
 
 <style>
-:root{
-  --accent:#49ffd2;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-*{box-sizing:border-box;}
-
 body{
-  margin:0;
-  min-height:100vh;
-  font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color:#fff;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
   overflow:hidden;
 }
 
-/* Video background */
-.bg-video{
+/* Видео фон */
+video{
   position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
+  right:0;
+  bottom:0;
+  min-width:100%;
+  min-height:100%;
   object-fit:cover;
-  z-index:-2;
+  z-index:-1;
 }
 
-/* Center */
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+/* Карточка */
+.card{
+  width:min(720px,90%);
+  padding:40px 30px;
+  border-radius:24px;
+
+  /* Почти прозрачное стекло */
+  background:rgba(0,0,0,0.05);
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+
+  border:1px solid rgba(255,255,255,0.25);
+
   text-align:center;
 }
 
-/* ✅ TRUE GLASS CARD (almost transparent) */
-.card{
-  width:min(720px,100%);
-  padding:34px 24px;
-  border-radius:22px;
-  position:relative;
-
-  /* почти прозрачное стекло */
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.10),
-    rgba(255,255,255,0.03)
-  );
-
-  /* блики/подсветка по краям (стеклянный эффект) */
-  border: 1px solid rgba(255,255,255,0.22);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  /* тень нейтральная, без зелёного */
-  box-shadow: 0 25px 70px rgba(0,0,0,0.38);
-}
-
-/* дополнительный “блик” внутри карточки */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:22px;
-  pointer-events:none;
-
-  background: radial-gradient(
-    900px 260px at 50% 10%,
-    rgba(255,255,255,0.18),
-    rgba(255,255,255,0.00) 60%
-  );
-}
-
-/* Title: лёгкое зелёное свечение (НЕ неон) */
-h1{
-  margin:0 0 12px;
-  font-size: clamp(34px,5vw,56px);
-  letter-spacing:0.5px;
-  color:#ffffff;
-
-  text-shadow:
-    0 0 6px rgba(73,255,210,0.22),
-    0 0 14px rgba(73,255,210,0.14),
-    0 10px 24px rgba(0,0,0,0.45);
-}
-
-/* Subtitle pure white */
-p{
-  margin:0 0 26px;
-  font-size:13px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:#ffffff;
-  opacity:0.95;
-}
-
-.btns{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  align-items:center;
-}
-
-/* Primary button */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:14px 20px;
-  min-width: 220px;
-
-  border-radius:18px;
-  text-decoration:none;
-  font-weight:800;
-
-  background: var(--accent);
-  color:#0b0f14;
-
-  box-shadow: 0 12px 30px rgba(73,255,210,0.32);
-}
-
-/* Secondary button (glass) */
-.btn.secondary{
-  background: rgba(255,255,255,0.10);
-  color:#ffffff;
-  border: 1px solid rgba(255,255,255,0.22);
-  box-shadow:none;
+/* Заголовок */
+.title{
+  font-size:clamp(32px,5vw,48px);
   font-weight:700;
+  margin-bottom:12px;
+  color:#ffffff;
+
+  /* Легкое зеленое свечение */
+  text-shadow:
+    0 0 10px rgba(0,255,170,0.5),
+    0 0 25px rgba(0,255,170,0.3);
 }
 
-.btn:active{ transform: scale(0.98); }
+/* Подзаголовок */
+.subtitle{
+  letter-spacing:3px;
+  font-size:14px;
+  opacity:0.9;
+  margin-bottom:30px;
+}
+
+/* Кнопки */
+.button{
+  display:block;
+  width:100%;
+  padding:16px;
+  border-radius:40px;
+  font-size:18px;
+  font-weight:600;
+  text-decoration:none;
+  margin-bottom:18px;
+  transition:0.3s;
+}
+
+/* Первая кнопка */
+.primary{
+  background:#4DE1B1;
+  color:#000;
+}
+
+.primary:hover{
+  transform:scale(1.05);
+}
+
+/* Вторая кнопка */
+.secondary{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.4);
+  color:white;
+}
+
+.secondary:hover{
+  background:rgba(255,255,255,0.2);
+}
 </style>
 </head>
 
 <body>
 
-<video class="bg-video" autoplay muted loop playsinline>
+<video autoplay muted loop playsinline>
   <source src="Fonstudio.mp4" type="video/mp4">
 </video>
 
-<main class="hero">
-  <section class="card">
-    <h1>Kedy Motion</h1>
-    <p>AI CREATIVE STUDIO</p>
+<div class="card">
+  <h1 class="title">Kedy Motion</h1>
+  <div class="subtitle">AI CREATIVE STUDIO</div>
 
-    <div class="btns">
-      <a class="btn" href="#">Watch works</a>
-      <a class="btn secondary" href="#">Order a video</a>
-    </div>
-  </section>
-</main>
+  <a href="#" class="button primary">Watch works</a>
+  <a href="#" class="button secondary">Order a video</a>
+</div>
 
 </body>
 </html>
+
 
 
 
