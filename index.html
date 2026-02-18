@@ -21,7 +21,7 @@
       overflow:hidden;
     }
 
-    /* Video background (NO dark overlay) */
+    /* Видео-фон без затемнения */
     .bg-video{
       position:fixed;
       inset:0;
@@ -31,7 +31,7 @@
       z-index:-2;
     }
 
-    /* Centered hero */
+    /* Центрирование */
     .hero{
       min-height:100vh;
       display:flex;
@@ -41,18 +41,18 @@
       text-align:center;
     }
 
-    /* Darken ONLY the card */
+    /* Светлая стеклянная карточка */
     .card{
       width:min(720px, 100%);
       padding:28px 22px;
       border-radius:18px;
 
-      background: rgba(0,0,0,0.38);  /* <-- card darkening */
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.18);   /* <-- светлый вариант */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
 
       border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.30);
     }
 
     h1{
@@ -86,7 +86,7 @@
       text-decoration:none;
 
       font-weight:800;
-      min-width: 170px;
+      min-width:170px;
 
       color:#0b0b0f;
       background: var(--accent);
@@ -97,7 +97,7 @@
 
     a.btn.secondary{
       background: rgba(255,255,255,0.10);
-      color: #fff;
+      color:#fff;
       border: 1px solid rgba(255,255,255,0.18);
       box-shadow:none;
       font-weight:700;
@@ -115,6 +115,7 @@
 </head>
 
 <body>
+
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="Fonstudio.mp4" type="video/mp4" />
   </video>
@@ -132,5 +133,7 @@
       <div class="hint">Background = showreel. Card = focus.</div>
     </section>
   </main>
+
 </body>
 </html>
+
