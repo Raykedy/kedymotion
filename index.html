@@ -1,151 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kedy Motion</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kedy Motion</title>
 
-  <style>
-    :root{
-      --accent: #49ffd2;
-      --text: #ffffff;
-    }
+<style>
+:root{
+  --accent:#49ffd2;
+  --white:#ffffff;
+}
 
-    *{ box-sizing:border-box; }
+*{box-sizing:border-box;}
 
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--text);
-      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      overflow:hidden;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial, system-ui, sans-serif;
+  color:#fff;
+  overflow:hidden;
+}
 
-    /* Видео-фон без затемнения */
-    .bg-video{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
-    }
+/* Видео фон */
+.bg-video{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
 
-    /* Центрирование */
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      text-align:center;
-    }
+/* Центрирование */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center;
+}
 
-    /* Карточка */
-    .card{
-      width:min(720px, 100%);
-      padding:28px 22px;
-      border-radius:18px;
+/* 🔥 Светлая стеклянная карточка */
+.card{
+  width:min(720px,100%);
+  padding:32px 24px;
+  border-radius:20px;
 
-      /* базовый вариант для десктопа */
-      background: rgba(0,0,0,0.14);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+  /* Светлый стеклянный эффект */
+  background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.03)
+  );
 
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.30);
-    }
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-    /* На Android/мобиле часто выглядит темнее — делаем заметно светлее */
-    @media (max-width: 768px){
-      .card{
-        background: rgba(0,0,0,0.08);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-      }
-    }
+  border:1px solid rgba(255,255,255,0.25);
 
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(34px, 5vw, 56px);
-      letter-spacing: 0.5px;
-      color: #ffffff;
+  box-shadow:
+    0 0 40px rgba(73,255,210,0.12),
+    0 25px 60px rgba(0,0,0,0.35);
+}
 
-      /* зелёное мягкое свечение */
-      text-shadow:
-        0 0 10px rgba(73,255,210,0.25),
-        0 0 22px rgba(73,255,210,0.18),
-        0 10px 30px rgba(0,0,0,0.55);
-    }
+/* Заголовок */
+h1{
+  margin:0 0 12px;
+  font-size: clamp(34px,5vw,56px);
+  letter-spacing:0.5px;
 
-    p{
-      margin:0 0 22px;
-      font-size: 13px;
-      opacity: 1;            /* белым, без серости */
-      color: #ffffff;        /* фиксируем белый */
-      letter-spacing: 0.9px;
-      text-transform: uppercase;
-    }
+  color:#ffffff;
 
-    .btns{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
+  /* 💚 ЯВНОЕ зелёное свечение */
+  text-shadow:
+    0 0 8px rgba(73,255,210,0.35),
+    0 0 20px rgba(73,255,210,0.35),
+    0 0 40px rgba(73,255,210,0.25);
+}
 
-    a.btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px 18px;
-      border-radius:14px;
-      text-decoration:none;
+/* Подзаголовок */
+p{
+  margin:0 0 26px;
+  font-size:13px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#ffffff;
+  opacity:1;
+}
 
-      font-weight:800;
-      min-width:170px;
+.btns{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
+}
 
-      color:#0b0b0f;
-      background: var(--accent);
-      box-shadow: 0 14px 45px rgba(73,255,210,0.22);
+/* Основная кнопка */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 20px;
+  min-width:190px;
 
-      transition: transform .15s ease, filter .15s ease;
-    }
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:800;
 
-    a.btn.secondary{
-      background: rgba(255,255,255,0.10);
-      color:#fff;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow:none;
-      font-weight:700;
-    }
+  background:var(--accent);
+  color:#0b0f14;
 
-    a.btn:active{ transform: scale(0.98); }
-    a.btn:hover{ filter: brightness(1.06); }
-  </style>
+  box-shadow:
+    0 10px 30px rgba(73,255,210,0.4);
+}
+
+/* Вторая кнопка */
+.btn.secondary{
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.35);
+  box-shadow:none;
+}
+
+.btn:active{transform:scale(0.98);}
+</style>
 </head>
 
 <body>
 
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="Fonstudio.mp4" type="video/mp4" />
-  </video>
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="Fonstudio.mp4" type="video/mp4">
+</video>
 
-  <main class="hero">
-    <section class="card">
-      <h1>Kedy Motion</h1>
-      <p>AI CREATIVE STUDIO</p>
+<main class="hero">
+  <section class="card">
+    <h1>Kedy Motion</h1>
+    <p>AI CREATIVE STUDIO</p>
 
-      <div class="btns">
-        <a class="btn" href="#works">Watch works</a>
-        <a class="btn secondary" href="#order">Order a video</a>
-      </div>
-
-      <!-- надпись снизу УБРАЛ -->
-    </section>
-  </main>
+    <div class="btns">
+      <a class="btn" href="#">Watch works</a>
+      <a class="btn secondary" href="#">Order a video</a>
+    </div>
+  </section>
+</main>
 
 </body>
 </html>
+
 
 
