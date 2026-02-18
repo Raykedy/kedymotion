@@ -12,20 +12,20 @@ body {
     background: black;
 }
 
-/* ВИДЕО ФОН — ОРИГИНАЛЬНЫЙ РАЗМЕР, ЦЕНТР */
+/* ВИДЕО ФОН — как у тебя */
 video {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: none;
-    max-height: none;
+    height: 100vh;
     width: auto;
-    height: auto;
+    min-width: 100%;
+    object-fit: cover;
     z-index: -1;
 }
 
-/* КАРТОЧКА — ПРОЗРАЧНОЕ СТЕКЛО */
+/* КАРТОЧКА */
 .card {
     position: absolute;
     top: 50%;
@@ -36,21 +36,20 @@ video {
     padding: 50px 30px;
     border-radius: 25px;
 
-    background: rgba(0,0,0,0.18);  /* ЛЁГКОЕ затемнение */
-    border: 1px solid rgba(255,255,255,0.25);
-    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    text-align: center; /* ВОТ ГЛАВНОЕ */
 }
 
-/* KEDY MOTION — ЗЕЛЕНЫЙ С ЛЁГКИМ СВЕЧЕНИЕМ */
+/* KEDY MOTION */
 h1 {
     margin: 0 0 15px 0;
     font-size: 42px;
     color: #4dd0a8;
-
-    text-shadow: 0 0 8px rgba(77,208,168,0.6);
 }
 
-/* AI CREATIVE STUDIO — БЕЛЫЙ */
+/* AI CREATIVE STUDIO */
 .subtitle {
     margin-bottom: 40px;
     letter-spacing: 3px;
@@ -100,6 +99,7 @@ h1 {
 
 </body>
 </html>
+
 
 
 
