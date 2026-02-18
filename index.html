@@ -41,13 +41,14 @@
       text-align:center;
     }
 
-    /* Светлая стеклянная карточка */
+    /* Карточка */
     .card{
       width:min(720px, 100%);
       padding:28px 22px;
       border-radius:18px;
 
-      background: rgba(0,0,0,0.18);   /* <-- светлый вариант */
+      /* базовый вариант для десктопа */
+      background: rgba(0,0,0,0.14);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
 
@@ -55,17 +56,33 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.30);
     }
 
+    /* На Android/мобиле часто выглядит темнее — делаем заметно светлее */
+    @media (max-width: 768px){
+      .card{
+        background: rgba(0,0,0,0.08);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+    }
+
     h1{
       margin:0 0 10px;
       font-size: clamp(34px, 5vw, 56px);
       letter-spacing: 0.5px;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.55);
+      color: #ffffff;
+
+      /* зелёное мягкое свечение */
+      text-shadow:
+        0 0 10px rgba(73,255,210,0.25),
+        0 0 22px rgba(73,255,210,0.18),
+        0 10px 30px rgba(0,0,0,0.55);
     }
 
     p{
       margin:0 0 22px;
       font-size: 13px;
-      opacity: 0.9;
+      opacity: 1;            /* белым, без серости */
+      color: #ffffff;        /* фиксируем белый */
       letter-spacing: 0.9px;
       text-transform: uppercase;
     }
@@ -105,12 +122,6 @@
 
     a.btn:active{ transform: scale(0.98); }
     a.btn:hover{ filter: brightness(1.06); }
-
-    .hint{
-      margin-top:16px;
-      font-size:12px;
-      opacity:0.75;
-    }
   </style>
 </head>
 
@@ -123,17 +134,18 @@
   <main class="hero">
     <section class="card">
       <h1>Kedy Motion</h1>
-      <p>AI Creative Studio</p>
+      <p>AI CREATIVE STUDIO</p>
 
       <div class="btns">
         <a class="btn" href="#works">Watch works</a>
         <a class="btn secondary" href="#order">Order a video</a>
       </div>
 
-      <div class="hint">Background = showreel. Card = focus.</div>
+      <!-- надпись снизу УБРАЛ -->
     </section>
   </main>
 
 </body>
 </html>
+
 
