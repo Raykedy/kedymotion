@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +26,18 @@ video {
     z-index: -1;
 }
 
-/* КАРТОЧКА — СТАЛА БОЛЬШЕ */
+/* КАРТОЧКА — ПРОПОРЦИОНАЛЬНАЯ */
 .card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 94%;
-    max-width: 900px;      /* БЫЛО 650px */
-    padding: 100px 80px;   /* БЫЛО 70px 50px */
-    border-radius: 30px;
+    
+    width: 85%;
+    max-width: 520px;        /* Ограничили ширину */
+    padding: 120px 50px;     /* Больше по высоте */
 
+    border-radius: 30px;
     background: rgba(0,0,0,0.22);
     border: 1px solid rgba(255,255,255,0.3);
 
@@ -44,27 +46,28 @@ video {
 
 /* KEDY MOTION */
 h1 {
-    margin: 0 0 25px 0;
-    font-size: 56px;   /* увеличил под новую карточку */
+    margin: 0 0 20px 0;
+    font-size: 48px;
     color: #4dd0a8;
 }
 
 /* AI CREATIVE STUDIO */
 .subtitle {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     letter-spacing: 4px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
 }
 
 /* КНОПКИ */
 .btn {
     display: block;
-    width: 100%;
-    padding: 22px;
-    margin-bottom: 25px;
+    width: 80%;               /* НЕ НА ВСЮ ШИРИНУ */
+    max-width: 320px;
+    margin: 0 auto 25px auto; /* по центру */
+    padding: 18px;
     border-radius: 50px;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     font-weight: bold;
     text-align: center;
