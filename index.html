@@ -1,29 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Kedy Motion</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kedy Motion</title>
+  <style>
+    :root{
+      --overlay: 0.45;
+      --blur: 0px;
+      --accent: #49ffd2;
+      --accent2:#ffb74a;
+      --text: #ffffff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      overflow:hidden;
+    }
+
+    .bg-video{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+      filter: blur(var(--blur));
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,var(--overlay));
+      z-index:-1;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      text-align:center;
+    }
+
+    .card{
+      width:min(720px, 100%);
+      padding:28px 22px;
+      border-radius:18px;
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(34px, 5vw, 56px);
+      letter-spacing: 0.5px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    p{
+      margin:0 0 22px;
+      font-size: 14px;
+      opacity: 0.9;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .btns{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#0b0b0f;
+      font-weight:700;
+      background: var(--accent);
+      box-shadow: 0 12px 40px rgba(73,255,210,0.25);
+      transform: translateZ(0);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      min-width: 160px;
+    }
+
+    a.btn.secondary{
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:none;
+    }
+
+    a.btn:active{ transform: scale(0.98); }
+    a.btn:hover{ filter: brightness(1.05); }
+
+    .hint{
+      margin-top:16px;
+      font-size:12px;
+      opacity:0.75;
+    }
+  </style>
 </head>
 
-<body style="margin:0; color:white; text-align:center; font-family:Arial;">
+<body>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="Fonstudio.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
 
-<video autoplay muted loop playsinline style="
-position: fixed;
-right: 0;
-bottom: 0;
-min-width: 100%;
-min-height: 100%;
-object-fit: cover;
-z-index: -1;">
-  <source src="Fonstudio.mp4" type="video/mp4">
-</video>
+  <main class="hero">
+    <section class="card">
+      <h1>Kedy Motion</h1>
+      <p>AI Creative Studio</p>
 
-<div style="padding-top:100px;">
-  <h1>Kedy Motion</h1>
-  <p>AI Creative Studio</p>
-</div>
+      <div class="btns">
+        <a class="btn" href="#works">Watch works</a>
+        <a class="btn secondary" href="#order">Order a video</a>
+      </div>
 
+      <div class="hint">Made for mobile + desktop. Background is your showreel.</div>
+    </section>
+  </main>
 </body>
 </html>
+
 
 
