@@ -1,1 +1,177 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kedy Motion — Заказ</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ===== ФОН КАК В WATCH ===== */
+
+video{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  height:100vh;
+  width:auto;
+  min-width:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+
+/* затемнение поверх видео */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
+}
+
+/* ===== КОНТЕНТ ===== */
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+  text-align:center;
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+p{
+  font-size:18px;
+  margin-bottom:40px;
+  opacity:0.8;
+}
+
+.form-box{
+  background:rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:15px;
+  backdrop-filter:blur(10px);
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:none;
+  background:rgba(255,255,255,0.15);
+  color:white;
+  font-size:14px;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+button{
+  padding:14px 30px;
+  background:#ff7a1a;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  color:black;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+button:hover{
+  background:#ff9b3d;
+}
+
+.back{
+  margin-top:30px;
+  display:inline-block;
+  color:white;
+  text-decoration:none;
+  opacity:0.6;
+}
+
+.back:hover{
+  opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Видео фон -->
+<video autoplay muted loop playsinline>
+  <source src="Fonstudio.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<h1>Start Your Project</h1>
+<p>Leave a request and we will contact you with concept, timing and pricing.</p>
+
+<div class="form-box">
+
+<form onsubmit="return fakeSubmit(event)">
+
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
+
+<select required>
+  <option value="">Project Type</option>
+  <option>Music Video</option>
+  <option>Promo / Brand</option>
+  <option>Trailer</option>
+  <option>Other</option>
+</select>
+
+<select required>
+  <option value="">Format</option>
+  <option>Vertical 9:16</option>
+  <option>Horizontal 16:9</option>
+  <option>Both</option>
+</select>
+
+<textarea placeholder="Describe your project, references, links..." required></textarea>
+
+<button type="submit">Send Request</button>
+
+</form>
+
+</div>
+
+<a class="back" href="index.html">← Back to Main</a>
+
+</div>
+
+<script>
+function fakeSubmit(e){
+  e.preventDefault();
+  alert("Request sent (demo mode).");
+  e.target.reset();
+  return false;
+}
+</script>
+
+</body>
+</html>
