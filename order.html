@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,38 +10,39 @@
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:black;
   color:white;
   overflow-x:hidden;
 }
 
-/* ===== ВИДЕО-ФОН (КАК У ТЕБЯ) ===== */
-
-video{
+/* Видео фон */
+.bg-video{
   position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  height:100vh;
-  width:auto;
-  min-width:100%;
-  object-fit:cover;
-  z-index:-1;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
 }
 
-.overlay{
+.bg-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* затемнение */
+.bg-overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.55);
   z-index:-1;
 }
 
-/* ===== КОНТЕНТ ===== */
-
+/* Контент */
 .container{
+  position:relative;
+  z-index:2;
   max-width:800px;
   margin:auto;
-  padding:80px 20px;
+  padding:100px 20px;
   text-align:center;
 }
 
@@ -54,15 +54,15 @@ h1{
 p{
   font-size:16px;
   margin-bottom:40px;
-  opacity:0.8;
+  opacity:0.85;
 }
 
 .form-box{
   background:rgba(0,0,0,0.45);
   backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.15);
   padding:30px;
-  border-radius:18px;
+  border-radius:20px;
 }
 
 input, select, textarea{
@@ -70,16 +70,11 @@ input, select, textarea{
   padding:12px 14px;
   margin-bottom:15px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.2);
   background:rgba(0,0,0,0.35);
   color:white;
   font-size:14px;
   outline:none;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:rgba(255,255,255,0.55);
 }
 
 textarea{
@@ -96,7 +91,7 @@ button{
   cursor:pointer;
   color:black;
   font-weight:800;
-  transition:0.2s ease;
+  transition:0.2s;
 }
 
 button:hover{
@@ -121,12 +116,13 @@ button:hover{
 
 <body>
 
-<!-- Видео фон -->
-<video autoplay muted loop playsinline>
-  <source src="Fonstudio.mp4" type="video/mp4">
-</video>
+<div class="bg-video">
+  <video autoplay muted loop playsinline>
+    <source src="Fonstudio.mp4" type="video/mp4">
+  </video>
+</div>
 
-<div class="overlay"></div>
+<div class="bg-overlay"></div>
 
 <div class="container">
 
@@ -137,11 +133,10 @@ button:hover{
 
 <form action="https://formspree.io/f/xwvnpeqp" method="POST">
 
-<!-- МЕТКА ИСТОЧНИКА -->
 <input type="hidden" name="source" value="Order Page">
+<input type="hidden" name="_redirect" value="https://kedymotion.com/order-success.html">
 
 <input type="text" name="name" placeholder="Your Name" required>
-
 <input type="email" name="email" placeholder="Your Email" required>
 
 <select name="project" required>
@@ -159,7 +154,7 @@ button:hover{
   <option>Both</option>
 </select>
 
-<textarea name="message" placeholder="Describe your project, references, links..." required></textarea>
+<textarea name="message" placeholder="Describe your project..." required></textarea>
 
 <button type="submit">Send Request</button>
 
@@ -173,4 +168,5 @@ button:hover{
 
 </body>
 </html>
+
 
