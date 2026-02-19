@@ -5,19 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kedy Motion — Заказ</title>
+<title>Kedy Motion — Order</title>
 
 <style>
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:black;
   color:white;
   overflow-x:hidden;
 }
 
-/* ===== ФОН КАК В WATCH ===== */
+/* ===== ВИДЕО-ФОН (КАК У ТЕБЯ) ===== */
 
 video{
   position:fixed;
@@ -31,13 +31,9 @@ video{
   z-index:-1;
 }
 
-/* затемнение поверх видео */
 .overlay{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   background:rgba(0,0,0,0.55);
   z-index:-1;
 }
@@ -45,39 +41,46 @@ video{
 /* ===== КОНТЕНТ ===== */
 
 .container{
-  max-width:900px;
+  max-width:800px;
   margin:auto;
-  padding:60px 20px;
+  padding:80px 20px;
   text-align:center;
 }
 
 h1{
-  font-size:42px;
-  margin-bottom:20px;
+  font-size:38px;
+  margin-bottom:12px;
 }
 
 p{
-  font-size:18px;
+  font-size:16px;
   margin-bottom:40px;
   opacity:0.8;
 }
 
 .form-box{
-  background:rgba(255,255,255,0.08);
-  padding:30px;
-  border-radius:15px;
+  background:rgba(0,0,0,0.45);
   backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.12);
+  padding:30px;
+  border-radius:18px;
 }
 
 input, select, textarea{
   width:100%;
-  padding:12px;
+  padding:12px 14px;
   margin-bottom:15px;
-  border-radius:8px;
-  border:none;
-  background:rgba(255,255,255,0.15);
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(0,0,0,0.35);
   color:white;
   font-size:14px;
+  outline:none;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:rgba(255,255,255,0.55);
 }
 
 textarea{
@@ -89,16 +92,17 @@ button{
   padding:14px 30px;
   background:#ff7a1a;
   border:none;
-  border-radius:8px;
-  font-size:16px;
+  border-radius:999px;
+  font-size:15px;
   cursor:pointer;
   color:black;
-  font-weight:bold;
-  transition:0.2s;
+  font-weight:800;
+  transition:0.2s ease;
 }
 
 button:hover{
   background:#ff9b3d;
+  transform:translateY(-1px);
 }
 
 .back{
@@ -128,16 +132,20 @@ button:hover{
 <div class="container">
 
 <h1>Start Your Project</h1>
-<p>Leave a request and we will contact you with concept, timing and pricing.</p>
+<p>Send a request and we will contact you with concept, timing and pricing.</p>
 
 <div class="form-box">
 
-<form onsubmit="return fakeSubmit(event)">
+<form action="https://formspree.io/f/xwvnpeqp" method="POST">
 
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
+<!-- МЕТКА ИСТОЧНИКА -->
+<input type="hidden" name="source" value="Order Page">
 
-<select required>
+<input type="text" name="name" placeholder="Your Name" required>
+
+<input type="email" name="email" placeholder="Your Email" required>
+
+<select name="project" required>
   <option value="">Project Type</option>
   <option>Music Video</option>
   <option>Promo / Brand</option>
@@ -145,14 +153,14 @@ button:hover{
   <option>Other</option>
 </select>
 
-<select required>
+<select name="format" required>
   <option value="">Format</option>
   <option>Vertical 9:16</option>
   <option>Horizontal 16:9</option>
   <option>Both</option>
 </select>
 
-<textarea placeholder="Describe your project, references, links..." required></textarea>
+<textarea name="message" placeholder="Describe your project, references, links..." required></textarea>
 
 <button type="submit">Send Request</button>
 
@@ -163,15 +171,6 @@ button:hover{
 <a class="back" href="index.html">← Back to Main</a>
 
 </div>
-
-<script>
-function fakeSubmit(e){
-  e.preventDefault();
-  alert("Request sent (demo mode).");
-  e.target.reset();
-  return false;
-}
-</script>
 
 </body>
 </html>
