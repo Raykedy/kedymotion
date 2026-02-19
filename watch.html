@@ -154,6 +154,23 @@
   .fitContain{ object-fit: contain; }
   .fitCover{ object-fit: cover; }
 
+  /* title under player */
+  .workTitle{
+    width:100%;
+    text-align:center;
+    font-size:16px;
+    letter-spacing:.5px;
+    opacity:.92;
+    margin-top:-4px;
+  }
+  .workMeta{
+    width:100%;
+    text-align:center;
+    font-size:12px;
+    opacity:.75;
+    margin-top:-10px;
+  }
+
   /* bottom selector */
   .selector{
     width:100%;
@@ -163,6 +180,7 @@
     justify-content:center;
   }
 
+  /* SHORT buttons */
   .chip{
     cursor:pointer;
     border-radius:999px;
@@ -174,20 +192,13 @@
     font-size:13px;
     letter-spacing:.4px;
     user-select:none;
+    white-space:nowrap;
   }
   .chip:hover{ border-color: rgba(255,255,255,.55); }
   .chip.active{
     border-color: rgba(77,208,168,.75);
     color: rgba(77,208,168,.95);
     background: rgba(77,208,168,.08);
-  }
-
-  /* small helper text */
-  .hint{
-    font-size:12px;
-    opacity:.75;
-    text-align:center;
-    margin-top:-4px;
   }
 
   @media (max-width: 520px){
@@ -226,7 +237,8 @@
       <video id="workVideo" class="fitCover" autoplay muted loop playsinline></video>
     </div>
 
-    <div class="hint" id="hint">Tap a work — vertical/horizontal switches automatically.</div>
+    <div class="workTitle" id="workTitle"></div>
+    <div class="workMeta" id="workMeta"></div>
 
     <div class="selector" id="selector"></div>
 
@@ -234,46 +246,69 @@
 </div>
 
 <script>
-  // 1) Add your works here (mp4 paths)
+  // === YOUR WORKS ===
+  // titleLong: shows under the player (can be long)
+  // chip: short label for the button
   // type: "h" (horizontal) or "v" (vertical)
   const works = [
-    { title: "Work 1 (H)", src: "videos/work1.mp4", type: "h" },
-    { title: "Work 2 (V)", src: "videos/work2.mp4", type: "v" },
-    { title: "Work 3 (H)", src: "videos/work3.mp4", type: "h" },
-    { title: "Work 4 (V)", src: "videos/work4.mp4", type: "v" },
+    {
+      chip: "RU • 16:9",
+      titleLong: "Work RU — full title (long name here)",
+      src: "videos/work_ru_16x9.mp4",
+      type: "h"
+    },
+    {
+      chip: "SR • 9:16",
+      titleLong: "Work SR — full title (long name here)",
+      src: "videos/work_sr_9x16.mp4",
+      type: "v"
+    },
+    {
+      chip: "EN • 16:9",
+      titleLong: "Work EN — full title (long name here)",
+      src: "videos/work_en_16x9.mp4",
+      type: "h"
+    }
   ];
 
   const shell = document.getElementById("shell");
   const vid = document.getElementById("workVideo");
   const selector = document.getElementById("selector");
   const toggleSound = document.getElementById("toggleSound");
+  const workTitle = document.getElementById("workTitle");
+  const workMeta = document.getElementById("workMeta");
 
   let current = 0;
   let soundOn = false;
 
   function applyMode(type){
-    // aspect
     shell.classList.remove("h","v");
     shell.classList.add(type);
 
-    // fit logic (hybrid):
-    // horizontal -> cover (more cinematic)
-    // vertical -> contain (no important crop)
+    // hybrid fit:
+    // horizontal -> cover (cinematic)
+    // vertical -> contain (no crop)
     vid.classList.remove("fitContain","fitCover");
     vid.classList.add(type === "v" ? "fitContain" : "fitCover");
+  }
+
+  function setText(w){
+    workTitle.textContent = w.titleLong || "";
+    const fmt = (w.type === "v") ? "Vertical 9:16" : "Horizontal 16:9";
+    workMeta.textContent = (w.chip ? w.chip.replace("•", "·") + " · " : "") + fmt;
   }
 
   function loadWork(i){
     current = i;
     const w = works[i];
     applyMode(w.type);
+    setText(w);
 
-    // set source
     vid.src = w.src;
+    vid.muted = !soundOn;
     vid.load();
     vid.play().catch(()=>{});
 
-    // update chips
     [...selector.children].forEach((c, idx)=>{
       c.classList.toggle("active", idx === i);
     });
@@ -284,7 +319,7 @@
     works.forEach((w, i)=>{
       const chip = document.createElement("div");
       chip.className = "chip" + (i === 0 ? " active" : "");
-      chip.textContent = w.title;
+      chip.textContent = w.chip || ("Work " + (i+1));
       chip.addEventListener("click", ()=> loadWork(i));
       selector.appendChild(chip);
     });
