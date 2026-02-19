@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,7 +7,6 @@
 <title>Kedy Motion — Order</title>
 
 <style>
-
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -14,12 +14,10 @@ body{
   overflow-x:hidden;
 }
 
-/* Видео фон */
 .bg-video{
   position:fixed;
   inset:0;
   z-index:-2;
-  overflow:hidden;
 }
 
 .bg-video video{
@@ -28,7 +26,6 @@ body{
   object-fit:cover;
 }
 
-/* затемнение */
 .bg-overlay{
   position:fixed;
   inset:0;
@@ -36,7 +33,6 @@ body{
   z-index:-1;
 }
 
-/* Контент */
 .container{
   position:relative;
   z-index:2;
@@ -96,21 +92,13 @@ button{
 
 button:hover{
   background:#ff9b3d;
-  transform:translateY(-1px);
 }
 
-.back{
-  margin-top:30px;
-  display:inline-block;
-  color:white;
-  text-decoration:none;
-  opacity:0.6;
+.note{
+  margin-top:12px;
+  font-size:13px;
+  opacity:0.8;
 }
-
-.back:hover{
-  opacity:1;
-}
-
 </style>
 </head>
 
@@ -131,40 +119,75 @@ button:hover{
 
 <div class="form-box">
 
-<form action="https://formspree.io/f/xwvnpeqp" method="POST">
+<form id="orderForm">
+  <input type="hidden" name="source" value="Order Page">
 
-<input type="hidden" name="source" value="Order Page">
-<input type="hidden" name="_redirect" value="https://kedymotion.com/order-success.html">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
 
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
+  <select name="project" required>
+    <option value="">Project Type</option>
+    <option>Music Video</option>
+    <option>Promo / Brand</option>
+    <option>Trailer</option>
+    <option>Other</option>
+  </select>
 
-<select name="project" required>
-  <option value="">Project Type</option>
-  <option>Music Video</option>
-  <option>Promo / Brand</option>
-  <option>Trailer</option>
-  <option>Other</option>
-</select>
+  <select name="format" required>
+    <option value="">Format</option>
+    <option>Vertical 9:16</option>
+    <option>Horizontal 16:9</option>
+    <option>Both</option>
+  </select>
 
-<select name="format" required>
-  <option value="">Format</option>
-  <option>Vertical 9:16</option>
-  <option>Horizontal 16:9</option>
-  <option>Both</option>
-</select>
+  <textarea name="message" placeholder="Describe your project..." required></textarea>
 
-<textarea name="message" placeholder="Describe your project..." required></textarea>
-
-<button type="submit">Send Request</button>
-
+  <button type="submit" id="sendBtn">Send Request</button>
+  <div class="note" id="note"></div>
 </form>
 
 </div>
 
-<a class="back" href="index.html">← Back to Main</a>
-
 </div>
+
+<script>
+const FORM_ENDPOINT = "https://formspree.io/f/xwvnpeqp";
+
+const form = document.getElementById("orderForm");
+const btn  = document.getElementById("sendBtn");
+const note = document.getElementById("note");
+
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+  note.textContent = "";
+
+  const data = new FormData(form);
+
+  try{
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    });
+
+    if(response.ok){
+      // 🔥 ЖЕЛЕЗНЫЙ РЕДИРЕКТ
+      window.location.replace(window.location.origin + "/order-success.html");
+      return;
+    } else {
+      note.textContent = "Error. Try again.";
+    }
+  }catch(error){
+    note.textContent = "Network error.";
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Send Request";
+});
+</script>
 
 </body>
 </html>
