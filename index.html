@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Kedy Motion</title>
 
 <style>
 :root{
   --cardSize: min(78vmin, 560px);
-  --cardTop: 46%; /* было 50% — подняли карточку вверх */
+  --cardTop: 46%;
 }
 
 body{
@@ -35,7 +30,7 @@ video{
   z-index:-1;
 }
 
-/* ПОЛНОСТЬЮ ПРОЗРАЧНАЯ КАРТОЧКА */
+/* ПРОЗРАЧНАЯ КАРТОЧКА */
 .card{
   position:absolute;
   top:var(--cardTop);
@@ -44,29 +39,24 @@ video{
   width:var(--cardSize);
   aspect-ratio:1/1;
   border-radius:28px;
-
-  background: transparent; /* полностью прозрачная */
+  background: transparent;
   border:1px solid rgba(255,255,255,0.6);
-
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:20px;
-
   text-align:center;
   padding: clamp(20px,4vmin,40px);
   box-sizing:border-box;
 }
 
-/* KEDY MOTION — ЗЕЛЁНЫЙ */
 h1{
   margin:0;
   font-size: clamp(28px,6vmin,52px);
   color:#4dd0a8;
 }
 
-/* AI CREATIVE STUDIO — БЕЛЫЙ */
 .subtitle{
   margin:0;
   font-size: clamp(12px,2.1vmin,16px);
@@ -74,7 +64,6 @@ h1{
   color:white;
 }
 
-/* ПРОЗРАЧНЫЕ КНОПКИ */
 .btn{
   display:block;
   width: clamp(220px,60%,360px);
@@ -85,13 +74,16 @@ h1{
   font-weight:bold;
   text-align:center;
   box-sizing:border-box;
-
   background: transparent;
   border:1px solid rgba(255,255,255,0.8);
   color:white;
+  transition:0.2s;
+}
+
+.btn:hover{
+  background:rgba(255,255,255,0.1);
 }
 </style>
-
 </head>
 
 <body>
@@ -104,12 +96,13 @@ h1{
   <h1>Kedy Motion</h1>
   <div class="subtitle">AI CREATIVE STUDIO</div>
 
-  <a href="#" class="btn">Watch works</a>
-  <a href="#" class="btn">Order a video</a>
+  <!-- 🔥 ПОДКЛЮЧЕНЫ СТРАНИЦЫ -->
+  <a href="/studio2051.html" class="btn">Watch works</a>
+  <a href="/order.html" class="btn">Order a video</a>
+
 </div>
 
 </body>
-
 </html>
 
 
