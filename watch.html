@@ -67,44 +67,50 @@
   .topbar{
     position:relative;
     width:100%;
-    padding: 22px 20px 26px;
+    padding: 28px 20px 32px;
     border-radius: 20px;
     background: var(--glass);
     border: 1px solid var(--border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-sizing:border-box;
     display:flex;
     justify-content:center;
   }
 
-  /* Back button — left, small */
-  .backBtn{
+  /* LOGO RIGHT */
+  .logoLink{
     position:absolute;
-    left:18px;
-    top:18px;
-    font-size:12px;
-    padding:6px 10px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.35);
-    background: rgba(0,0,0,.25);
-    color: rgba(255,255,255,.8);
-    text-decoration:none;
-    letter-spacing:.5px;
-  }
-  .backBtn:hover{
-    border-color: rgba(255,255,255,.6);
-    color:white;
+    right:22px;
+    top:22px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s ease;
   }
 
-  /* Center column */
+  .logoLink img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    border-radius:50%;
+  }
+
+  .logoLink:hover{
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 6px rgba(77,208,168,.6));
+  }
+
+  /* CENTERED TEXT COLUMN */
   .brand{
     display:flex;
     flex-direction:column;
     align-items:center;
     text-align:center;
-    gap:12px;
-    max-width:700px;
+    gap:14px;
+    max-width:720px;
   }
 
   .brand .name{
@@ -156,6 +162,7 @@
     cursor:pointer;
     transition: transform .18s ease, border-color .18s ease;
   }
+
   .card:hover{
     transform: translateY(-3px);
     border-color: rgba(255,255,255,.55);
@@ -202,7 +209,6 @@
   .title{
     font-weight:800;
     font-size:14px;
-    line-height:1.2;
   }
 
   .sub{
@@ -211,15 +217,16 @@
     color: rgba(255,255,255,.8);
   }
 
-  /* Overlay */
+  /* OVERLAY */
   .overlay{
     position:fixed;
     inset:0;
     display:none;
     align-items:center;
     justify-content:center;
-    z-index: 50;
+    z-index:50;
   }
+
   .overlay.show{ display:flex; }
 
   .overlayBg{
@@ -258,12 +265,11 @@
     width:100%;
     height:100%;
     border:0;
-    display:block;
     background:#000;
   }
 
   @media (max-width: 980px){
-    .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid{ grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 560px){
     .grid{ grid-template-columns: 1fr; }
@@ -284,7 +290,6 @@
   <div class="ui">
 
     <div class="topbar">
-      <a href="index.html" class="backBtn">← Back</a>
 
       <div class="brand">
         <div class="name">Kedy Motion</div>
@@ -297,9 +302,16 @@
           <p><strong>Short films from €90</strong> • Individual solutions for every client.</p>
         </div>
       </div>
+
+      <!-- LOGO RIGHT (replaces button) -->
+      <a href="index.html" class="logoLink">
+        <img src="logo.png" alt="Kedy Motion Logo">
+      </a>
+
     </div>
 
     <div class="grid" id="grid"></div>
+
   </div>
 </div>
 
