@@ -23,7 +23,6 @@
     overflow-x:hidden;
   }
 
-  /* BACKGROUND VIDEO (same as main) */
   .bg{
     position:fixed;
     inset:0;
@@ -41,7 +40,6 @@
     object-fit:cover;
   }
 
-  /* subtle overlay for readability */
   .veil{
     position:fixed;
     inset:0;
@@ -62,98 +60,91 @@
     width:min(var(--uiMax), 92vw);
     display:flex;
     flex-direction:column;
-    gap:14px;
+    gap:20px;
   }
 
-  /* header */
+  /* HEADER */
   .topbar{
+    position:relative;
     width:100%;
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:12px;
-    padding: 14px 16px;
-    border-radius: 18px;
+    padding: 22px 20px 26px;
+    border-radius: 20px;
     background: var(--glass);
     border: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-sizing:border-box;
+    display:flex;
+    justify-content:center;
   }
 
+  /* Back button — left, small */
+  .backBtn{
+    position:absolute;
+    left:18px;
+    top:18px;
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.35);
+    background: rgba(0,0,0,.25);
+    color: rgba(255,255,255,.8);
+    text-decoration:none;
+    letter-spacing:.5px;
+  }
+  .backBtn:hover{
+    border-color: rgba(255,255,255,.6);
+    color:white;
+  }
+
+  /* Center column */
   .brand{
     display:flex;
     flex-direction:column;
-    gap:8px;
-    user-select:none;
-    max-width: 78ch;
-  }
-
-  .brand .nameRow{
-    display:flex;
-    gap:10px;
-    align-items:baseline;
-    flex-wrap:wrap;
+    align-items:center;
+    text-align:center;
+    gap:12px;
+    max-width:700px;
   }
 
   .brand .name{
     font-weight:700;
-    letter-spacing:.5px;
+    letter-spacing:1px;
     color: var(--accent);
-    font-size:16px;
+    font-size:17px;
   }
 
   .brand .tag{
-    font-size:12px;
-    letter-spacing:3px;
-    opacity:.9;
+    font-size:11px;
+    letter-spacing:4px;
+    opacity:.8;
   }
 
   .brand .copy{
     display:flex;
     flex-direction:column;
-    gap:6px;
+    gap:8px;
   }
 
   .brand .copy p{
     margin:0;
-    font-size:13px;
-    line-height:1.35;
+    font-size:14px;
+    line-height:1.5;
     color: var(--muted);
   }
 
-  .actions{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex-wrap:wrap;
-    justify-content:flex-end;
+  .brand .copy p strong{
+    color:white;
   }
 
-  .btn{
-    cursor:pointer;
-    user-select:none;
-    border-radius:999px;
-    padding:10px 14px;
-    background: transparent;
-    border:1px solid rgba(255,255,255,.35);
-    color: var(--text);
-    font-weight:700;
-    text-decoration:none;
-    font-size:14px;
-    line-height:1;
-  }
-  .btn:hover{ border-color: rgba(255,255,255,.6); }
-
-  /* grid: 3 in a row on desktop */
+  /* GRID */
   .grid{
     width:100%;
     display:grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 16px;
   }
 
-  /* vertical cards 9:16 */
   .card{
     position:relative;
     border-radius: 18px;
@@ -166,7 +157,7 @@
     transition: transform .18s ease, border-color .18s ease;
   }
   .card:hover{
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     border-color: rgba(255,255,255,.55);
   }
 
@@ -176,60 +167,51 @@
     background:#000;
     background-size:cover;
     background-position:center;
-    filter:saturate(1.03) contrast(1.03);
     position:relative;
   }
 
-  /* soft bottom gradient for readability */
   .thumb::after{
     content:"";
     position:absolute;
     inset:auto 0 0 0;
-    height: 44%;
-    background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,0));
-    pointer-events:none;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,0));
   }
 
   .meta{
     position:absolute;
-    left:12px;
-    right:12px;
-    bottom:12px;
+    left:14px;
+    right:14px;
+    bottom:14px;
     display:flex;
     flex-direction:column;
-    gap:7px;
+    gap:8px;
   }
 
   .pill{
     align-self:flex-start;
     border-radius:999px;
-    padding:6px 10px;
+    padding:5px 10px;
     border:1px solid rgba(255,255,255,.22);
-    background: rgba(0,0,0,.25);
-    font-size:12px;
-    letter-spacing:.5px;
-    color: rgba(255,255,255,.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0,0,0,.35);
+    font-size:11px;
+    letter-spacing:.6px;
+    color: rgba(255,255,255,.9);
   }
 
   .title{
     font-weight:800;
-    letter-spacing:.3px;
     font-size:14px;
     line-height:1.2;
-    text-shadow: 0 10px 30px rgba(0,0,0,.65);
   }
 
   .sub{
     font-size:12px;
-    line-height:1.25;
-    color: rgba(255,255,255,.78);
-    letter-spacing:.15px;
-    text-shadow: 0 10px 30px rgba(0,0,0,.65);
+    line-height:1.3;
+    color: rgba(255,255,255,.8);
   }
 
-  /* overlay */
+  /* Overlay */
   .overlay{
     position:fixed;
     inset:0;
@@ -240,13 +222,11 @@
   }
   .overlay.show{ display:flex; }
 
-  /* soft dim */
   .overlayBg{
     position:absolute;
     inset:0;
     background: rgba(0,0,0,.55);
     backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
   }
 
   .modal{
@@ -255,8 +235,6 @@
     border-radius: 18px;
     border: 1px solid rgba(255,255,255,.25);
     background: rgba(0,0,0,.28);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     overflow:hidden;
   }
 
@@ -267,16 +245,14 @@
     position:absolute;
     top:10px;
     right:10px;
-    z-index:2;
     border-radius:999px;
-    padding:10px 12px;
-    border:1px solid rgba(255,255,255,.35);
-    background: rgba(0,0,0,.35);
-    color: rgba(255,255,255,.92);
+    padding:8px 11px;
+    border:1px solid rgba(255,255,255,.4);
+    background: rgba(0,0,0,.4);
+    color:white;
     font-weight:700;
     cursor:pointer;
   }
-  .closeBtn:hover{ border-color: rgba(255,255,255,.6); }
 
   iframe{
     width:100%;
@@ -296,119 +272,112 @@
 </head>
 
 <body>
-  <!-- Background -->
-  <div class="bg">
-    <video autoplay muted loop playsinline>
-      <source src="Fonstudio.mp4" type="video/mp4" />
-    </video>
-  </div>
-  <div class="veil"></div>
 
-  <div class="wrap">
-    <div class="ui">
-      <div class="topbar">
-        <div class="brand">
-          <div class="nameRow">
-            <div class="name">Kedy Motion</div>
-            <div class="tag">WATCH WORKS</div>
-          </div>
+<div class="bg">
+  <video autoplay muted loop playsinline>
+    <source src="Fonstudio.mp4" type="video/mp4" />
+  </video>
+</div>
+<div class="veil"></div>
 
-          <!-- HEADER TEXT (final) -->
-          <div class="copy">
-            <p><b>Cinematic video production for brands, musicians, and content creators.</b></p>
-            <p>Striking visual solutions. Fast turnaround. Original scripts and creative direction.</p>
-            <p>We work in multiple languages and adapt every project to its audience.</p>
-            <p><b>Short films from €90</b> • Individual solutions for every client.</p>
-          </div>
-        </div>
+<div class="wrap">
+  <div class="ui">
 
-        <div class="actions">
-          <a class="btn" href="index.html">Back</a>
+    <div class="topbar">
+      <a href="index.html" class="backBtn">← Back</a>
+
+      <div class="brand">
+        <div class="name">Kedy Motion</div>
+        <div class="tag">WATCH WORKS</div>
+
+        <div class="copy">
+          <p><strong>Cinematic video production for brands, musicians, and content creators.</strong></p>
+          <p>Striking visual solutions. Fast turnaround. Original scripts and creative direction.</p>
+          <p>We work in multiple languages and adapt every project to its audience.</p>
+          <p><strong>Short films from €90</strong> • Individual solutions for every client.</p>
         </div>
       </div>
-
-      <div class="grid" id="grid"></div>
     </div>
-  </div>
 
-  <!-- OVERLAY -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="overlayBg" id="overlayBg"></div>
-    <div class="modal h" id="modal">
-      <button class="closeBtn" id="closeBtn" type="button">✕</button>
-      <iframe id="player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-    </div>
+    <div class="grid" id="grid"></div>
   </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlayBg" id="overlayBg"></div>
+  <div class="modal h" id="modal">
+    <button class="closeBtn" id="closeBtn">✕</button>
+    <iframe id="player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
 
 <script>
-  const works = [
-    {
-      pill: "AI COMMERCIAL",
-      title: "Greek Street Flavor",
-      sub: "Cinematic AI commercial for a Greek gyros street food café. Produced by Kedy Motion.",
-      type: "v",
-      youtubeId: "8HRj5jHF5-w",
-      thumb: "https://img.youtube.com/vi/8HRj5jHF5-w/hqdefault.jpg"
-    },
-    {
-      pill: "CINEMATIC AI VISUAL",
-      title: "Here and Now",
-      sub: "Music: EdisonFit — “Here and Now”. Visual for 2051: Awakening Algorithm. Concept & production by Kedy Motion.",
-      type: "h",
-      youtubeId: "MU3C7UTSNHs",
-      thumb: "https://img.youtube.com/vi/MU3C7UTSNHs/hqdefault.jpg"
-    }
-  ];
-
-  const grid = document.getElementById("grid");
-  const overlay = document.getElementById("overlay");
-  const overlayBg = document.getElementById("overlayBg");
-  const modal = document.getElementById("modal");
-  const closeBtn = document.getElementById("closeBtn");
-  const player = document.getElementById("player");
-
-  function ytUrl(id){
-    // autoplay + sound after user click
-    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&rel=0&playsinline=1`;
+const works = [
+  {
+    pill: "AI COMMERCIAL",
+    title: "Greek Street Flavor",
+    sub: "Cinematic AI commercial for a Greek gyros street food café. Produced by Kedy Motion.",
+    type: "v",
+    youtubeId: "8HRj5jHF5-w",
+    thumb: "https://img.youtube.com/vi/8HRj5jHF5-w/hqdefault.jpg"
+  },
+  {
+    pill: "CINEMATIC AI VISUAL",
+    title: "Here and Now",
+    sub: "Music: EdisonFit — “Here and Now”. Visual for 2051: Awakening Algorithm. Concept & production by Kedy Motion.",
+    type: "h",
+    youtubeId: "MU3C7UTSNHs",
+    thumb: "https://img.youtube.com/vi/MU3C7UTSNHs/hqdefault.jpg"
   }
+];
 
-  function openVideo(work){
-    modal.classList.remove("h","v");
-    modal.classList.add(work.type === "v" ? "v" : "h");
-    overlay.classList.add("show");
-    overlay.setAttribute("aria-hidden", "false");
-    player.src = ytUrl(work.youtubeId);
-    document.body.style.overflow = "hidden";
-  }
+const grid = document.getElementById("grid");
+const overlay = document.getElementById("overlay");
+const overlayBg = document.getElementById("overlayBg");
+const modal = document.getElementById("modal");
+const closeBtn = document.getElementById("closeBtn");
+const player = document.getElementById("player");
 
-  function closeVideo(){
-    overlay.classList.remove("show");
-    overlay.setAttribute("aria-hidden", "true");
-    player.src = "";
-    document.body.style.overflow = "";
-  }
+function ytUrl(id){
+  return `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&rel=0&playsinline=1`;
+}
 
-  works.forEach((w) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="thumb" style="background-image:url('${w.thumb}')"></div>
-      <div class="meta">
-        <div class="pill">${w.pill || ""}</div>
-        <div class="title">${w.title || ""}</div>
-        <div class="sub">${w.sub || ""}</div>
-      </div>
-    `;
-    card.addEventListener("click", () => openVideo(w));
-    grid.appendChild(card);
-  });
+function openVideo(work){
+  modal.classList.remove("h","v");
+  modal.classList.add(work.type === "v" ? "v" : "h");
+  overlay.classList.add("show");
+  player.src = ytUrl(work.youtubeId);
+  document.body.style.overflow = "hidden";
+}
 
-  closeBtn.addEventListener("click", closeVideo);
-  overlayBg.addEventListener("click", closeVideo);
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeVideo();
-  });
+function closeVideo(){
+  overlay.classList.remove("show");
+  player.src = "";
+  document.body.style.overflow = "";
+}
+
+works.forEach((w) => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <div class="thumb" style="background-image:url('${w.thumb}')"></div>
+    <div class="meta">
+      <div class="pill">${w.pill}</div>
+      <div class="title">${w.title}</div>
+      <div class="sub">${w.sub}</div>
+    </div>
+  `;
+  card.addEventListener("click", () => openVideo(w));
+  grid.appendChild(card);
+});
+
+closeBtn.addEventListener("click", closeVideo);
+overlayBg.addEventListener("click", closeVideo);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeVideo();
+});
 </script>
+
 </body>
 </html>
 
