@@ -84,9 +84,9 @@
   .brand{
     display:flex;
     flex-direction:column;
-    gap:6px;
+    gap:8px;
     user-select:none;
-    max-width: 75ch;
+    max-width: 78ch;
   }
 
   .brand .nameRow{
@@ -102,13 +102,21 @@
     color: var(--accent);
     font-size:16px;
   }
+
   .brand .tag{
     font-size:12px;
     letter-spacing:3px;
     opacity:.9;
   }
 
-  .brand .desc{
+  .brand .copy{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .brand .copy p{
+    margin:0;
     font-size:13px;
     line-height:1.35;
     color: var(--muted);
@@ -304,10 +312,13 @@
             <div class="name">Kedy Motion</div>
             <div class="tag">WATCH WORKS</div>
           </div>
-          <div class="desc">
-            Cinematic AI production for brands, artists and creators.
-            Prices: <b>from €X</b> per short • <b>from €Y/min</b> for full videos.
-            Click a card — the video opens on top of the page.
+
+          <!-- HEADER TEXT (final) -->
+          <div class="copy">
+            <p><b>Cinematic video production for brands, musicians, and content creators.</b></p>
+            <p>Striking visual solutions. Fast turnaround. Original scripts and creative direction.</p>
+            <p>We work in multiple languages and adapt every project to its audience.</p>
+            <p><b>Short films from €90</b> • Individual solutions for every client.</p>
           </div>
         </div>
 
@@ -357,7 +368,7 @@
   const player = document.getElementById("player");
 
   function ytUrl(id){
-    // autoplay + SOUND after user click
+    // autoplay + sound after user click
     return `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&rel=0&playsinline=1`;
   }
 
