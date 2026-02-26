@@ -7,7 +7,6 @@
 <title>Kedy Motion — Watch</title>
 
 <style>
-
 :root{
   --uiMax: 1120px;
   --glass: rgba(0,0,0,.34);
@@ -50,7 +49,7 @@ body{
   object-fit:cover;
 }
 
-/* overlay veil */
+/* veil */
 .veil{
   position:fixed;
   inset:0;
@@ -82,7 +81,7 @@ body{
   padding:26px 20px 30px;
   border-radius: var(--r20);
   background: var(--glass);
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow);
   display:flex;
@@ -126,11 +125,22 @@ body{
   opacity:.82;
 }
 
+.copy{
+  margin-top:2px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
 .copy p{
   margin:0;
   font-size:14px;
   line-height:1.55;
   color: var(--muted);
+}
+
+.copy p strong{
+  color: rgba(255,255,255,.95);
 }
 
 /* GRID */
@@ -145,7 +155,7 @@ body{
   position:relative;
   border-radius: var(--r18);
   background: var(--glass2);
-  border: 1px solid rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.18);
   overflow:hidden;
   cursor:pointer;
 }
@@ -238,11 +248,9 @@ iframe{
 @media (max-width:980px){
   .grid{ grid-template-columns:repeat(2,1fr); }
 }
-
 @media (max-width:560px){
   .grid{ grid-template-columns:1fr; }
 }
-
 </style>
 </head>
 
@@ -263,9 +271,14 @@ iframe{
 <div class="brand">
   <div class="name">Kedy Motion</div>
   <div class="tag">WATCH WORKS</div>
+
   <div class="copy">
-    <p><strong>Cinematic video production for brands and creators.</strong></p>
+    <p><strong>Cinematic video production for brands, musicians, and content creators.</strong></p>
+    <p>Striking visual solutions. Fast turnaround. Original scripts and creative direction.</p>
+    <p>We work in multiple languages and adapt every project to its audience.</p>
+    <p><strong>Short films from €90</strong> • Individual solutions for every client.</p>
   </div>
+
 </div>
 <a href="index.html" class="logoLink">
   <img src="logo.png" alt="Logo">
@@ -301,7 +314,7 @@ const works = [
   {
     pill: "AI COMMERCIAL",
     title: "Greek Street Flavor",
-    sub: "Cinematic AI commercial for a Greek gyros café.",
+    sub: "Cinematic AI commercial for a Greek gyros street food café. Produced by Kedy Motion.",
     type: "v",
     youtubeId: "8HRj5jHF5-w",
     thumb: "https://img.youtube.com/vi/8HRj5jHF5-w/hqdefault.jpg"
@@ -310,7 +323,7 @@ const works = [
   {
     pill: "CINEMATIC AI VISUAL",
     title: "Here and Now",
-    sub: "Music: EdisonFit — Visual for 2051.",
+    sub: "Music: EdisonFit — “Here and Now”. Visual for 2051: Awakening Algorithm. Concept & production by Kedy Motion.",
     type: "h",
     youtubeId: "MU3C7UTSNHs",
     thumb: "https://img.youtube.com/vi/MU3C7UTSNHs/hqdefault.jpg"
