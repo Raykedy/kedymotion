@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kedimotion.com/sitemap.xml
+Sitemap: https://kedymotion.com/sitemap.xml
